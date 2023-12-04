@@ -21,7 +21,6 @@ const Chart = () => {
         </div>
         <ChartOne />
         <ChartTwo />
-        <ChartThree />
       </div>
     </>
   );
