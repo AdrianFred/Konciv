@@ -64,7 +64,6 @@ export default function Dashboard({ indiaData }: DashboardProps) {
   return (
     <div>
       <Breadcrumb pageName="Home" />
-      {/* Selection UI for state and district */}
       <div className="flex space-x-2">
         {/* State selection */}
         <select
@@ -137,11 +136,14 @@ export default function Dashboard({ indiaData }: DashboardProps) {
           <PiTestTube />
         </CardDataStats>
       </div>
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartPie title="Stats" numbers={[recovered, deceased]} />
-      </div>
-      <div className="mx-auto mt-6 max-w-[800px]">
-        <VaccineStats total={population.toLocaleString()} atLeastOne={atLeastOneDosePercentage} fullyVaccinated={fullyVaccinatedPercentage} />
+      <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 md:gap-6 lg:grid-cols-2 2xl:mt-7.5 2xl:gap-7.5">
+        <div className="max-w-[700px]">
+          <ChartPie title="Stats" numbers={[recovered, deceased]} />
+        </div>
+
+        <div>
+          <VaccineStats total={population.toLocaleString()} atLeastOne={atLeastOneDosePercentage} fullyVaccinated={fullyVaccinatedPercentage} />
+        </div>
       </div>
     </div>
   );

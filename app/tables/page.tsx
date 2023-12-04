@@ -1,65 +1,32 @@
-"use client";
-
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import ChartLine from "@/components/Charts/ChartLine";
-import { useEffect, useState } from "react";
-import { stateNames } from "@/lib/stateNames";
+import TableBoard from "@/components/TableBoard";
+import React from "react";
+import { Metadata } from "next";
 
-const TablesPage = () => {
-  const [chartData, setChartData] = useState([]);
-  const [selectedState, setSelectedState] = useState("TT"); // Default selection
-  const [stateOptions, setStateOptions] = useState([]);
-  const [allData, setAllData] = useState({}); // Store all fetched data
+export const metadata: Metadata = {
+  title: "Covid-19 | Tables",
+  description: "Dashboard for covid-19 data",
+};
 
-  useEffect(() => {
-    fetch("https://data.covid19india.org/v4/min/timeseries.min.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllData(data); // Store all data for future processing
-        setStateOptions(Object.keys(data)); // Set state options for dropdown
-        processData(data, "TT"); // Default data loading
-      });
-  }, []);
+async function getData() {
+  const res = await fetch("https://data.covid19india.org/v4/min/timeseries.min.json", { next: { revalidate: 3600 } });
+  const data = await res.json();
 
-  const processData = (data, stateCode) => {
-    const stateData = data[stateCode].dates;
-    const formattedData = Object.entries(stateData).map(([date, value]) => {
-      return {
-        x: date,
-        y: value.total.confirmed || 0, // Replace 'tested' with the metric you're interested in
-      };
-    });
-    console.log(formattedData);
-    setChartData(formattedData);
-  };
+  if (!res.ok) {
+    throw new Error(`Failed to fetch data from https://data.covid19india.org/v4/min/timeseries.min.json, status code ${res.status}`);
+  }
 
-  const getStateNameByCode = (stateCode: string) => {
-    return stateNames[stateCode];
-  };
+  return data;
+}
 
-  const handleStateChange = (event) => {
-    const newState = event.target.value;
-    setSelectedState(newState);
-    processData(allData, newState); // Process the already fetched data
-  };
-
+export default async function TablesPage() {
+  const data = await getData();
   return (
     <>
       <Breadcrumb pageName="Tables" />
-      <div className="mb-4">
-        <select value={selectedState} onChange={handleStateChange} className="rounded border border-gray-300 p-2">
-          {stateOptions.map((stateCode) => (
-            <option key={stateCode} value={stateCode}>
-              {getStateNameByCode(stateCode)}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className="flex flex-col gap-10">
-        <ChartLine title={`COVID-19 Testing Data - ${selectedState}`} dates={chartData} />
+        <TableBoard data={data} />
       </div>
     </>
   );
-};
-
-export default TablesPage;
+}
