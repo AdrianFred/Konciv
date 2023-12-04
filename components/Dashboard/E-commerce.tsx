@@ -19,7 +19,7 @@ async function getInfo() {
 }
 
 const ECommerce: React.FC = () => {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState<any>(null);
   useEffect(() => {
     getInfo().then((apiData) => {
       const dataArray = Object.entries(apiData).map(([key, value]) => ({ key, value }));
@@ -63,7 +63,7 @@ const ECommerce: React.FC = () => {
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />
         <ChartTwo />
-        <ChartThree />
+
         <MapOne />
         <div className="col-span-12 xl:col-span-8">
           <TableOne />
