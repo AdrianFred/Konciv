@@ -38,7 +38,15 @@ type ChartSeries = {
 // Assuming this is a placeholder for your stateNames
 
 const TableBoard = ({ data }: { data: DataProp }) => {
-  const [chartData, setChartData] = useState<ChartSeries>({});
+  const [chartData, setChartData] = useState<ChartSeries>({
+    confirmed: [],
+    deceased: [],
+    other: [],
+    recovered: [],
+    tested: [],
+    vaccinated1: [],
+    vaccinated2: [],
+  });
   const [selectedState, setSelectedState] = useState<string>("TT");
   const [stateOptions, setStateOptions] = useState<string[]>([]);
   const [allData, setAllData] = useState<DataProp>({});

@@ -13,13 +13,13 @@ type DataPoint = {
 
 // Define a type for the data object
 type DataObject = {
-  confirmed: DataPoint[];
-  deceased: DataPoint[];
-  other: DataPoint[];
-  recovered: DataPoint[];
-  tested: DataPoint[];
-  vaccinated1: DataPoint[];
-  vaccinated2: DataPoint[];
+  confirmed: { x: string; y: number }[];
+  deceased: { x: string; y: number }[];
+  other: { x: string; y: number }[];
+  recovered: { x: string; y: number }[];
+  tested: { x: string; y: number }[];
+  vaccinated1: { x: string; y: number }[];
+  vaccinated2: { x: string; y: number }[];
 };
 
 type ChartLineProps = {
@@ -51,17 +51,24 @@ const ChartLine = ({ title, data }: ChartLineProps) => {
 
   let series = [];
   if (selectedMetric === "all") {
-    series = Object.entries(data).map(([metric, values]) => ({
+    // Handle the 'all' case by iterating over each metric in 'data'
+    series = Object.entries(data).map(([metric, values]: any) => ({
       name: metric.charAt(0).toUpperCase() + metric.slice(1),
       data: getCumulativeData(values),
-      color: metricColors[metric as keyof DataObject], // Assign color
+      color: metricColors[metric as keyof DataObject],
     }));
   } else {
+    // For a specific metric, directly access its data
+    const metricData: any = data[selectedMetric as keyof DataObject];
+    if (!metricData) {
+      console.error(`No data found for metric: ${selectedMetric}`);
+      return null; // or handle the error appropriately
+    }
     series = [
       {
         name: selectedMetric.charAt(0).toUpperCase() + selectedMetric.slice(1),
-        data: getCumulativeData(data[selectedMetric as keyof DataObject]),
-        color: metricColors[selectedMetric as keyof DataObject], // Assign color
+        data: getCumulativeData(metricData),
+        color: metricColors[selectedMetric as keyof DataObject],
       },
     ];
   }
@@ -114,9 +121,9 @@ const ChartLine = ({ title, data }: ChartLineProps) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center ">
+    <div className="flex flex-col justify-center items-center rounded-sm bg-white dark:bg-boxdark">
       <div className="mb-4">
-        <label>Sort by:</label>
+        <label>Sort by: </label>
         <select
           value={selectedMetric}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedMetric(e.target.value as keyof DataObject | "all")}
