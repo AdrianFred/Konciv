@@ -179,7 +179,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Tables
+                  Line chart
                 </Link>
               </li>
               {/* <!-- Menu Item Tables --> */}

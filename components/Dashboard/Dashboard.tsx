@@ -69,7 +69,7 @@ export default function Dashboard({ indiaData }: DashboardProps) {
         <select
           onChange={handleSelectionChange("state")}
           value={selection.state}
-          className="rounded-sm border border-stroke bg-white py-1 shadow-default dark:border-strokedark dark:bg-boxdark"
+          className="rounded-sm border max-w-40 border-stroke bg-white py-1 lg:max-w-70 shadow-default dark:border-strokedark dark:bg-boxdark"
         >
           <option value="TT">India (Total)</option>
           {data &&
@@ -85,7 +85,7 @@ export default function Dashboard({ indiaData }: DashboardProps) {
           <select
             onChange={handleSelectionChange("district")}
             value={selection.district}
-            className="rounded-sm border border-stroke bg-white py-1 shadow-default dark:border-strokedark dark:bg-boxdark"
+            className="rounded-sm border border-stroke bg-white py-1 shadow-default max-w-40 lg:max-w-70 dark:border-strokedark dark:bg-boxdark"
           >
             <option value="">Select District (Total)</option>
             {Object.keys(data[selection.state].districts).map((districtName) => (
