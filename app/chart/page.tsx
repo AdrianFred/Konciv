@@ -1,7 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import ChartFour from "@/components/Charts/ChartFour";
 import ChartOne from "@/components/Charts/ChartOne";
-import ChartThree from "@/components/Charts/ChartThree";
+import ChartThree from "@/components/Charts/ChartPie";
 import ChartTwo from "@/components/Charts/ChartTwo";
 import { Metadata } from "next";
 export const metadata: Metadata = {

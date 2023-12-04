@@ -1,23 +1,25 @@
 "use client";
+
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-interface ChartThreeState {
+interface ChartPieState {
   series: number[];
 }
 
-interface ChartThreeProps {
+interface ChartPieProps {
   title: string;
+  numbers: number[];
 }
 
 const options: ApexOptions = {
   chart: {
     type: "donut",
   },
-  colors: ["#10B981", "#375E83", "#259AE6", "#FFA70B"],
-  labels: ["Remote", "Hybrid", "Onsite", "Leave"],
+  colors: ["#10B981", "#375E83"],
+  labels: ["Recovered", "Deceased"],
   legend: {
     show: true,
     position: "bottom",
@@ -32,7 +34,7 @@ const options: ApexOptions = {
     },
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
   },
   responsive: [
     {
@@ -54,10 +56,16 @@ const options: ApexOptions = {
   ],
 };
 
-const ChartThree: React.FC<ChartThreeProps> = ({ title }) => {
-  const [state, setState] = useState<ChartThreeState>({
-    series: [65, 34, 12, 56],
+const ChartPie: React.FC<ChartPieProps> = ({ title, numbers }) => {
+  const [state, setState] = useState<ChartPieState>({
+    series: numbers,
   });
+
+  useEffect(() => {
+    setState({
+      series: numbers,
+    });
+  }, [numbers]);
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
@@ -98,47 +106,8 @@ const ChartThree: React.FC<ChartThreeProps> = ({ title }) => {
           <ReactApexChart options={options} series={state.series} type="donut" />
         </div>
       </div>
-
-      {/* <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Desktop </span>
-              <span> 65% </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Tablet </span>
-              <span> 34% </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#8FD0EF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Mobile </span>
-              <span> 45% </span>
-            </p>
-          </div>
-        </div>
-        <div className="w-full px-8 sm:w-1/2">
-          <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
-            <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Unknown </span>
-              <span> 12% </span>
-            </p>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
 
-export default ChartThree;
+export default ChartPie;

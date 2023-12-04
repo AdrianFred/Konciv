@@ -157,7 +157,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 }}
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
-
               {/* <!-- Menu Item Tables --> */}
               <li>
                 <Link
@@ -184,15 +183,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </Link>
               </li>
               {/* <!-- Menu Item Tables --> */}
-            </ul>
-          </div>
-
-          {/* <!-- Others Group --> */}
-          <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">OTHERS</h3>
-
-            <ul className="mb-6 flex flex-col gap-1.5">
-              {/* <!-- Menu Item Chart --> */}
               <li>
                 <Link
                   href="/chart"
@@ -221,7 +211,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Chart
                 </Link>
               </li>
-              {/* <!-- Menu Item Chart --> */}
             </ul>
           </div>
         </nav>

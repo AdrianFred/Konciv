@@ -25,9 +25,12 @@ const VaccineStats = ({ total, atLeastOne, fullyVaccinated }: VaccineStatsProps)
       {/* Combined Progress Bar */}
       <div className="relative w-full bg-white border rounded-full h-2.5 dark:bg-white mb-4">
         {/* Progress Bar for 'At least one dose' */}
-        <div className="bg-danger top-[-1px] absolute h-2.5 rounded-full opacity-75" style={{ width: `${atLeastOneDosePercentage}%` }}></div>
+        <div
+          className="bg-[#10B981] top-[-1px] absolute h-2.5 rounded-full opacity-75 dark:bg-danger"
+          style={{ width: `${atLeastOneDosePercentage}%` }}
+        ></div>
         {/* Overlay Progress Bar for 'Fully vaccinated' */}
-        <div className="absolute top-[-1px] bg-danger h-2.5 rounded-full" style={{ width: `${fullyVaccinatedPercentage}%` }}></div>
+        <div className="absolute top-[-1px] bg-[#10B981] h-2.5 rounded-full dark:bg-danger" style={{ width: `${fullyVaccinatedPercentage}%` }}></div>
       </div>
 
       {/* Labels */}

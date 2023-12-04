@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import ChartOne from "../Charts/ChartOne";
-import ChartThree from "../Charts/ChartThree";
+import ChartThree from "../Charts/ChartPie";
 import ChartTwo from "../Charts/ChartTwo";
 import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
