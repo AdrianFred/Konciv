@@ -23,7 +23,7 @@ export default async function TablesPage() {
   const data = await getData();
   return (
     <>
-      <Breadcrumb pageName="Tables" />
+      <Breadcrumb pageName="Line-Chart" />
       <div className="flex flex-col gap-10">
         <TableBoard data={data} />
       </div>

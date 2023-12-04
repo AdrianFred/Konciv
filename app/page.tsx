@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Dashboard from "@/components/Dashboard/Dashboard";
 
 export const metadata: Metadata = {
-  title: "Konciv",
+  title: "Covid-19 | India",
   description: "Dashboard for covid-19 data",
 };
 
